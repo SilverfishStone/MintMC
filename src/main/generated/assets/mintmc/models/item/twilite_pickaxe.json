@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "mintmc:item/twilite_pickaxe"
+  }
+}

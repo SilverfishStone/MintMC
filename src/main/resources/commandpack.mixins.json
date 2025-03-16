@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.silverfishstone.mintmc.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ZombieEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "ZombieEntityRenderStateMixin",
+    "ZombieRendererMixin"
+  ]
+}
