@@ -39,6 +39,8 @@ public class MintBlocks {
     public static final Block GRANITE_DIAMOND_ORE = registerBlock("granite_diamond_ore", Block::new, Block.Settings.copy(Blocks.DIAMOND_ORE));
     public static final Block GRANITE_EMERALD_ORE = registerBlock("granite_emerald_ore", Block::new, Block.Settings.copy(Blocks.EMERALD_ORE));
 
+    public static final Block CRUCIBLE = registerBlock("crucible", Block::new, Block.Settings.copy(Blocks.CRAFTING_TABLE));
+
     public static final Block LIMESTONE = registerBlock("limestone", Block::new, Block.Settings.copy(Blocks.STONE));
     public static final Block COBBLED_LIMESTONE = registerBlock("cobbled_limestone", Block::new, Block.Settings.copy(Blocks.COBBLESTONE));
     public static final Block LIMESTONE_RUBY_ORE = registerBlock("limestone_ruby_ore", Block::new, Block.Settings.copy(Blocks.DIAMOND_ORE));
@@ -89,6 +91,5 @@ public class MintBlocks {
 
     public static void registerBlocks() {
         MintMain.LOGGER.info("Registering {} blocks", MintMain.MOD_ID);
-
     }
 }
