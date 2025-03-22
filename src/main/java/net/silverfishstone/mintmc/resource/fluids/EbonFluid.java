@@ -95,7 +95,6 @@ public abstract class EbonFluid extends FlowableFluid {
     @Override
     protected void onEntityCollision(World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
         handler.addEvent(CollisionEvent.FREEZE);
-        handler.addPostCallback(CollisionEvent.FREEZE, Entity::setFrozenTicks);
     }
 
     @Override
