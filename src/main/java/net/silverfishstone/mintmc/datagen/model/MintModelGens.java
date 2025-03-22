@@ -22,6 +22,7 @@ public class MintModelGens extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
 
         CUBE_ALL.forEach(blockStateModelGenerator::registerSimpleCubeAll);
+        blockStateModelGenerator.registerSimpleState(MintBlocks.EBON);
         registEndSoils(blockStateModelGenerator);
 
     }

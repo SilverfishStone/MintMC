@@ -4,6 +4,7 @@ package net.silverfishstone.mintmc.resource.items;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.EquippableComponent;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.item.equipment.ArmorMaterial;
 import net.minecraft.item.equipment.ArmorMaterials;
@@ -110,7 +111,7 @@ public class MintItems {
     public static final Item TWILITE_LEGGINGS = registerItem("twilite_leggings", Item::new, new Item.Settings().armor(ArmorMaterials.NETHERITE, EquipmentType.LEGGINGS));
     public static final Item TWILITE_BOOTS = registerItem("twilite_boots", Item::new, new Item.Settings().armor(ArmorMaterials.NETHERITE, EquipmentType.BOOTS));
 
-
+    public static final Item EBON_BUCKET = registerItem("ebon_bucket", settings -> new BucketItem(Fluids.WATER, settings), new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
 
 
     private static Item registerItem(String id, Function<Item.Settings, Item> factory, Item.Settings settings) {

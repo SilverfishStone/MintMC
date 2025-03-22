@@ -2,6 +2,7 @@ package net.silverfishstone.mintmc.datagen.tags;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.damage.DamageType;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -64,6 +65,15 @@ public class MintTags {
             return createTag(name, DAMAGE_TYPE);
         }
     }
+
+    public final class FluidTags {
+        public static final TagKey<Fluid> EBON = of("ebon");
+
+        private static TagKey<Fluid> of(String id) {
+            return createTag(id, RegistryKeys.FLUID);
+        }
+    }
+
     private static <V> TagKey<V> createTag (String name, RegistryKey<Registry<V>> key) {
         return TagKey.of(key, Identifier.of(MintMain.MOD_ID, name));
     }

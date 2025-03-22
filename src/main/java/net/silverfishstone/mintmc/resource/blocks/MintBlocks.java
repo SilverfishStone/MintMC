@@ -1,17 +1,17 @@
 package net.silverfishstone.mintmc.resource.blocks;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.RedstoneOreBlock;
+import net.minecraft.block.*;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.silverfishstone.mintmc.MintMain;
 import net.silverfishstone.mintmc.datagen.model.MintModelGens;
+import net.silverfishstone.mintmc.resource.blocks.custom.EbonFluidBlock;
 import net.silverfishstone.mintmc.resource.blocks.custom.EndSoilBlock;
+import net.silverfishstone.mintmc.resource.fluids.MintFluids;
 import net.silverfishstone.mintmc.resource.items.MintItemGroups;
 import net.silverfishstone.mintmc.resource.items.MintItems;
 
@@ -54,6 +54,10 @@ public class MintBlocks {
     public static final Block ENDERIUM_ORE = registerBlock("enderium_ore", Block::new, Block.Settings.copy(Blocks.END_STONE));
     public static final Block WILD_OMELLA = registerNonCubeBlock("wild_omella", EndSoilBlock::new, AbstractBlock.Settings.copy(Blocks.CRIMSON_NYLIUM));
     public static final Block CORRUPTED_OMELLA = registerNonCubeBlock("corrupted_omella", EndSoilBlock::new, AbstractBlock.Settings.copy(Blocks.CRIMSON_NYLIUM));
+
+    public static final Block EBON = registerNonCubeBlock("ebon", settings -> new EbonFluidBlock(MintFluids.EBON, settings), AbstractBlock.Settings.copy(Blocks.WATER));
+    public static final Block EBON_ICE = registerBlock("ebon_ice", TranslucentBlock::new, Block.Settings.copy(Blocks.HONEY_BLOCK).mapColor(MapColor.BLUE));
+    public static final Block NEW_BLOCK = registerBlock("new_block", Block::new, Block.Settings.copy(Blocks.OBSIDIAN));
 
 
     private static Block registerBlock(String id, Function<Block.Settings, Block> factory, Block.Settings settings) {
