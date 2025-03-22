@@ -1,8 +1,7 @@
 package net.silverfishstone.mintmc.resource.blocks;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.*;
-import net.minecraft.fluid.Fluids;
+import net.minecraft.block.entity.BlastFurnaceBlockEntity;
 import net.minecraft.item.*;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -12,8 +11,6 @@ import net.silverfishstone.mintmc.datagen.model.MintModelGens;
 import net.silverfishstone.mintmc.resource.blocks.custom.EbonFluidBlock;
 import net.silverfishstone.mintmc.resource.blocks.custom.EndSoilBlock;
 import net.silverfishstone.mintmc.resource.fluids.MintFluids;
-import net.silverfishstone.mintmc.resource.items.MintItemGroups;
-import net.silverfishstone.mintmc.resource.items.MintItems;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -39,7 +36,7 @@ public class MintBlocks {
     public static final Block GRANITE_DIAMOND_ORE = registerBlock("granite_diamond_ore", Block::new, Block.Settings.copy(Blocks.DIAMOND_ORE));
     public static final Block GRANITE_EMERALD_ORE = registerBlock("granite_emerald_ore", Block::new, Block.Settings.copy(Blocks.EMERALD_ORE));
 
-    public static final Block CRUCIBLE = registerBlock("crucible", Block::new, Block.Settings.copy(Blocks.CRAFTING_TABLE));
+    public static final Block CRUCIBLE = registerBlock("crucible", Block::new, Block.Settings.copy(Blocks.BLAST_FURNACE));
 
     public static final Block LIMESTONE = registerBlock("limestone", Block::new, Block.Settings.copy(Blocks.STONE));
     public static final Block COBBLED_LIMESTONE = registerBlock("cobbled_limestone", Block::new, Block.Settings.copy(Blocks.COBBLESTONE));
