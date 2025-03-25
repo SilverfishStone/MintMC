@@ -1,0 +1,9 @@
+{
+  "type": "mintmc:crucible",
+  "input": [
+    { "item": "mintmc:twilite_scrap", "count": 3 },
+    { "item": "mintmc:silver_ingot", "count": 3 }
+  ],
+  "result": { "item": "mintmc:twilite_ingot", "count": 1 },
+  "cookingTime": 400
+}

@@ -1,0 +1,9 @@
+{
+  "type": "mintmc:crucible",
+  "input": [
+    { "item": "minecraft:nether_scrap", "count": 3 },
+    { "item": "minecraft:gold_ingot", "count": 3 }
+  ],
+  "result": { "item": "minecraft:netherite_ingot", "count": 1 },
+  "cookingTime": 400
+}

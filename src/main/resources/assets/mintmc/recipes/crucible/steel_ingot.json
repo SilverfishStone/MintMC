@@ -1,0 +1,8 @@
+{
+  "type": "mintmc:crucible",
+  "input": [
+    { "item": "mintmc:steel_scrap", "count": 3 }
+  ],
+  "result": { "item": "mintmc:steel_ingot", "count": 1 },
+  "cookingTime": 200
+}

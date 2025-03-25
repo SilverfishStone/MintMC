@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "north": "mintmc:block/crucible_side",
+    "south": "mintmc:block/crucible_side",
+    "east": "mintmc:block/crucible_side",
+    "west": "mintmc:block/crucible_side",
+    "up": "mintmc:block/crucible_top",
+    "down": "mintmc:block/crucible_bottom",
+    "particle": "mintmc:block/crucible_side"
+  }
+}

@@ -1,15 +1,20 @@
 package net.silverfishstone.mintmc.resource.blocks;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlastFurnaceBlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.silverfishstone.mintmc.MintMain;
 import net.silverfishstone.mintmc.datagen.model.MintModelGens;
+import net.silverfishstone.mintmc.resource.blocks.custom.CrucibleBlock;
 import net.silverfishstone.mintmc.resource.blocks.custom.EbonFluidBlock;
 import net.silverfishstone.mintmc.resource.blocks.custom.EndSoilBlock;
+import net.silverfishstone.mintmc.resource.blocks.entity.CrucibleBlockEntity;
 import net.silverfishstone.mintmc.resource.fluids.MintFluids;
 
 import java.util.function.BiFunction;
@@ -35,6 +40,13 @@ public class MintBlocks {
     public static final Block GRANITE_REDSTONE_ORE = registerBlock("granite_redstone_ore", RedstoneOreBlock::new, AbstractBlock.Settings.copy(Blocks.REDSTONE_ORE));
     public static final Block GRANITE_DIAMOND_ORE = registerBlock("granite_diamond_ore", Block::new, Block.Settings.copy(Blocks.DIAMOND_ORE));
     public static final Block GRANITE_EMERALD_ORE = registerBlock("granite_emerald_ore", Block::new, Block.Settings.copy(Blocks.EMERALD_ORE));
+
+    public static final Block CRUCIBLE = registerBlock("crucible", CrucibleBlock::new, Block.Settings.copy(Blocks.STONE));
+
+    public static final BlockEntityType<CrucibleBlockEntity> CRUCIBLE_BLOCK_ENTITY =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE,
+                    Identifier.of("mintmc", "crucible_entity"),
+                    FabricBlockEntityTypeBuilder.create(CrucibleBlockEntity::new, CRUCIBLE).build());
 
     public static final Block LIMESTONE = registerBlock("limestone", Block::new, Block.Settings.copy(Blocks.STONE));
     public static final Block COBBLED_LIMESTONE = registerBlock("cobbled_limestone", Block::new, Block.Settings.copy(Blocks.COBBLESTONE));

@@ -1,0 +1,9 @@
+{
+  "type": "mintmc:crucible",
+  "input": [
+    { "item": "minecraft:gold_ingot", "count": 4 },
+    { "item": "minecraft:copper_ingot", "count": 2 }
+  ],
+  "result": { "item": "mintmc:rose_gold_ingot", "count": 1 },
+  "cookingTime": 300
+}

@@ -1,0 +1,20 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "mintmc:block/crucible_on"
+      },
+      "when": {
+        "activated": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "mintmc:block/crucible"
+      },
+      "when": {
+        "activated": "false"
+      }
+    }
+  ]
+}
