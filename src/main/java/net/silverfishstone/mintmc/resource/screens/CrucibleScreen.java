@@ -23,7 +23,12 @@ public class CrucibleScreen extends HandledScreen<CrucibleScreenHandler> {
 
     @Override
     protected void drawBackground(DrawContext context, float deltaTicks, int mouseX, int mouseY) {
-        context.drawTexture(RenderLayer::getGuiTextured, TEXTURE,( backgroundWidth * 2) + 40, backgroundHeight - 1, 0, 0, backgroundWidth, backgroundHeight, backgroundWidth, backgroundHeight);
+        // Center the GUI on the screen
+        int x = (this.width - this.backgroundWidth) / 2;
+        int y = (this.height - this.backgroundHeight) / 2;
+
+        // Draw the texture at the calculated position
+        context.drawTexture(TEXTURE, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight, this.backgroundWidth, this.backgroundHeight);
     }
 
     @Override

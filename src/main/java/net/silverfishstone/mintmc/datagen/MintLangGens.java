@@ -2,12 +2,8 @@ package net.silverfishstone.mintmc.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.minecraft.block.Block;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.passive.ChickenVariant;
-import net.minecraft.entity.passive.WolfVariant;
-import net.minecraft.entity.passive.WolfVariants;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryKey;
@@ -21,11 +17,11 @@ import java.util.concurrent.CompletableFuture;
 
 public class MintLangGens extends FabricLanguageProvider {
     public MintLangGens(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
-        super(dataOutput, registryLookup);
+        super(dataOutput, "en_us");
     }
 
     @Override
-    public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
+    public void generateTranslations(TranslationBuilder translationBuilder) {
         translateFullSetAndOre(translationBuilder, "silver", "Silver");
         translateFullSet(translationBuilder, "steel", "Steel");
         translateFullSet(translationBuilder, "rose_gold", "Rose Gold");
@@ -148,4 +144,5 @@ public class MintLangGens extends FabricLanguageProvider {
     private static String effect(RegistryEntry<StatusEffect> effect) {
         return effect.value().getTranslationKey();
     }
+
 }

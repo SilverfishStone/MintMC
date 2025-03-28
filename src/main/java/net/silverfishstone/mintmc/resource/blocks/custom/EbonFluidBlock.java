@@ -6,10 +6,10 @@ import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldEvents;
-import net.minecraft.world.block.WireOrientation;
 import net.silverfishstone.mintmc.datagen.tags.MintTags;
 import net.silverfishstone.mintmc.resource.blocks.MintBlocks;
 import org.jetbrains.annotations.Nullable;
@@ -20,24 +20,24 @@ public class EbonFluidBlock extends FluidBlock implements FluidDrainable {
     }
 
     @Override
-    protected boolean isTransparent(BlockState state) {
+    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
         return true;
     }
 
     @Override
-    protected boolean canPathfindThrough(BlockState state, NavigationType type) {
+    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return !this.fluid.isIn(MintTags.FluidTags.EBON);
     }
 
     @Override
-    protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
+    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
         if (this.receiveNeighborFluids(world, pos, state)) {
             world.scheduleFluidTick(pos, state.getFluidState().getFluid(), this.fluid.getTickRate(world));
         }
     }
 
     @Override
-    protected void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, @Nullable WireOrientation wireOrientation, boolean notify) {
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         if (this.receiveNeighborFluids(world, pos, state)) {
             world.scheduleFluidTick(pos, state.getFluidState().getFluid(), this.fluid.getTickRate(world));
         }

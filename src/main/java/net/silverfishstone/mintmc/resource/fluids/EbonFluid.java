@@ -5,15 +5,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.CollisionEvent;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCollisionHandler;
 import net.minecraft.fluid.*;
 import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -22,8 +18,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
-import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.dimension.DimensionTypes;
 import net.silverfishstone.mintmc.datagen.tags.MintTags;
 import net.silverfishstone.mintmc.resource.blocks.MintBlocks;
 import net.silverfishstone.mintmc.resource.items.MintItems;
@@ -51,7 +45,7 @@ public abstract class EbonFluid extends FlowableFluid {
     public void randomDisplayTick(World world, BlockPos pos, FluidState state, Random random) {
         if (!state.isStill() && !(Boolean)state.get(FALLING)) {
             if (random.nextInt(64) == 0) {
-                world.playSoundClient(
+                world.playSound(
                         (double)pos.getX() + 0.5,
                         (double)pos.getY() + 0.5,
                         (double)pos.getZ() + 0.5,
@@ -63,7 +57,7 @@ public abstract class EbonFluid extends FlowableFluid {
                 );
             }
         } else if (random.nextInt(10) == 0) {
-            world.addParticleClient(
+            world.addParticle(
                     ParticleTypes.UNDERWATER,
                     (double)pos.getX() + random.nextDouble(),
                     (double)pos.getY() + random.nextDouble(),
@@ -81,8 +75,9 @@ public abstract class EbonFluid extends FlowableFluid {
         return ParticleTypes.DRIPPING_WATER;
     }
 
+
     @Override
-    protected boolean isInfinite(ServerWorld world) {
+    protected boolean isInfinite(World world) {
         return world.getGameRules().getBoolean(GameRules.WATER_SOURCE_CONVERSION);
     }
 
@@ -90,16 +85,6 @@ public abstract class EbonFluid extends FlowableFluid {
     protected void beforeBreakingBlock(WorldAccess world, BlockPos pos, BlockState state) {
         BlockEntity blockEntity = state.hasBlockEntity() ? world.getBlockEntity(pos) : null;
         Block.dropStacks(state, world, pos, blockEntity);
-    }
-
-    @Override
-    protected void onEntityCollision(World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
-        handler.addEvent(CollisionEvent.FREEZE);
-    }
-
-    @Override
-    public int getMaxFlowDistance(WorldView world) {
-        return 4;
     }
 
     @Override
@@ -187,6 +172,11 @@ public abstract class EbonFluid extends FlowableFluid {
         }
 
         @Override
+        protected int getFlowSpeed(WorldView world) {
+            return 0;
+        }
+
+        @Override
         public int getLevel(FluidState state) {
             return (Integer)state.get(LEVEL);
         }
@@ -198,6 +188,11 @@ public abstract class EbonFluid extends FlowableFluid {
     }
 
     public static class Still extends EbonFluid {
+        @Override
+        protected int getFlowSpeed(WorldView world) {
+            return 0;
+        }
+
         @Override
         public int getLevel(FluidState state) {
             return 8;

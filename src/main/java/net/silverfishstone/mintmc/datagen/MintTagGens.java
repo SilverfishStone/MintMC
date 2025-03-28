@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataOutput;
-import net.minecraft.data.tag.TagProvider;
+import net.minecraft.data.server.tag.TagProvider;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.item.Items;
@@ -26,7 +26,7 @@ public class MintTagGens {
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             getOrCreateTagBuilder(MintTags.Resources.INCORRECT_FOR_STEEL_TOOL);
-            getOrCreateTagBuilder(BlockTags.INCORRECT_FOR_IRON_TOOL)
+            getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
                     .addTag(MintTags.Resources.INCORRECT_FOR_STEEL_TOOL)
                     .add(Blocks.DEEPSLATE,
                             Blocks.DEEPSLATE_BRICKS,

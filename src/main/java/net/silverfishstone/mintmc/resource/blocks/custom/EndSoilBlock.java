@@ -19,12 +19,7 @@ import net.minecraft.world.gen.feature.NetherConfiguredFeatures;
 import net.silverfishstone.mintmc.resource.blocks.MintBlocks;
 
 public class EndSoilBlock extends Block implements Fertilizable {
-    public static final MapCodec<EndSoilBlock> CODEC = createCodec(EndSoilBlock::new);
 
-    @Override
-    public MapCodec<EndSoilBlock> getCodec() {
-        return CODEC;
-    }
 
     public EndSoilBlock(Settings settings) {
         super(settings);
@@ -33,19 +28,19 @@ public class EndSoilBlock extends Block implements Fertilizable {
     private static boolean stayAlive(BlockState state, WorldView world, BlockPos pos) {
         BlockPos blockPos = pos.up();
         BlockState blockState = world.getBlockState(blockPos);
-        int i = ChunkLightProvider.getRealisticOpacity(state, blockState, Direction.UP, blockState.getOpacity());
-        return i < 15;
+        int i = ChunkLightProvider.getRealisticOpacity(world, state, pos, blockState, blockPos, Direction.UP, blockState.getOpacity(world, blockPos));
+        return i < world.getMaxLightLevel();
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!stayAlive(state, world, pos)) {
             world.setBlockState(pos, Blocks.END_STONE.getDefaultState());
         }
     }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         return world.getBlockState(pos.up()).isAir();
     }
 
@@ -59,7 +54,7 @@ public class EndSoilBlock extends Block implements Fertilizable {
         BlockState blockState = world.getBlockState(pos);
         BlockPos blockPos = pos.up();
         ChunkGenerator chunkGenerator = world.getChunkManager().getChunkGenerator();
-        Registry<ConfiguredFeature<?, ?>> registry = world.getRegistryManager().getOrThrow(RegistryKeys.CONFIGURED_FEATURE);
+        Registry<ConfiguredFeature<?, ?>> registry = world.getRegistryManager().get(RegistryKeys.CONFIGURED_FEATURE);
         if (blockState.isOf(MintBlocks.CORRUPTED_OMELLA)) {
             this.generate(registry, NetherConfiguredFeatures.CRIMSON_FOREST_VEGETATION_BONEMEAL, world, chunkGenerator, random, blockPos);
         } else if (blockState.isOf(MintBlocks.WILD_OMELLA)) {
@@ -71,12 +66,9 @@ public class EndSoilBlock extends Block implements Fertilizable {
         }
     }
 
+
     private void generate(Registry<ConfiguredFeature<?, ?>> registry, RegistryKey<ConfiguredFeature<?, ?>> key, ServerWorld world, ChunkGenerator chunkGenerator, Random random, BlockPos pos) {
-        registry.getOptional(key).ifPresent(entry -> entry.value().generate(world, chunkGenerator, random, pos));
+        registry.getEntry(key).ifPresent(entry -> entry.value().generate(world, chunkGenerator, random, pos));
     }
 
-    @Override
-    public Fertilizable.FertilizableType getFertilizableType() {
-        return Fertilizable.FertilizableType.NEIGHBOR_SPREADER;
-    }
 }

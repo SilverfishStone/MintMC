@@ -1,11 +1,11 @@
 package net.silverfishstone.mintmc.datagen.model;
 
 
-import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.data.*;
+import net.minecraft.data.client.*;
 import net.silverfishstone.mintmc.resource.blocks.MintBlocks;
 import net.silverfishstone.mintmc.resource.items.MintItems;
 
@@ -37,7 +37,7 @@ public class MintModelGens extends FabricModelProvider {
                 .put(TextureKey.BOTTOM, TextureMap.getId(Blocks.END_STONE))
                 .put(TextureKey.TOP, TextureMap.getId(block))
                 .put(TextureKey.SIDE, TextureMap.getSubId(block, "_side"));
-        gen.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, BlockStateModelGenerator.createModel(Models.CUBE_BOTTOM_TOP.upload(block, textureMap, gen.modelCollector))));
+        gen.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, Models.CUBE_BOTTOM_TOP.upload(block, textureMap, gen.modelCollector)));
     }
 
     @Override

@@ -42,13 +42,13 @@ public abstract class LivingEntityMixin {
 
             entity.damageArmor(source, amount);
             if (source.isIn(DamageTypeTags.IS_FIRE)) {
-                amount = DamageUtilPlusStat.getDamageLeft(amount, armorStats.getFire(), entity.getAttributeValue(EntityAttributes.ARMOR_TOUGHNESS));
+                amount = DamageUtilPlusStat.getDamageLeft(amount, armorStats.getFire(), entity.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
             } else if (source.isIn(DamageTypeTags.IS_EXPLOSION)) {
-                amount = DamageUtilPlusStat.getDamageLeft(amount, armorStats.getBlast(), entity.getAttributeValue(EntityAttributes.ARMOR_TOUGHNESS));
+                amount = DamageUtilPlusStat.getDamageLeft(amount, armorStats.getBlast(), entity.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
             } else if (source.isIn(MintTags.Resources.PVP)) {
-                amount = DamageUtilPlusStat.getDamageLeft(amount, armorStats.getCombat(), entity.getAttributeValue(EntityAttributes.ARMOR_TOUGHNESS));
+                amount = DamageUtilPlusStat.getDamageLeft(amount, armorStats.getCombat(), entity.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
             } else {
-                amount = DamageUtilPlusStat.getDamageLeft(amount, armorStats.getDamage(), entity.getAttributeValue(EntityAttributes.ARMOR_TOUGHNESS));
+                amount = DamageUtilPlusStat.getDamageLeft(amount, armorStats.getDamage(), entity.getAttributeValue(EntityAttributes.GENERIC_ARMOR_TOUGHNESS));
             }
         }
 
@@ -69,7 +69,7 @@ public abstract class LivingEntityMixin {
         List<ItemStack> rules = new ArrayList<>();
         rules.add(living().getEquippedStack(EquipmentSlot.FEET));
         rules.add(living().getEquippedStack(EquipmentSlot.LEGS));
-        rules.add(living().getEquippedStack(EquipmentSlot.BODY));
+        rules.add(living().getEquippedStack(EquipmentSlot.CHEST));
         rules.add(living().getEquippedStack(EquipmentSlot.HEAD));
         int blast = 0;
         for(ItemStack stack : rules) {
@@ -93,7 +93,7 @@ public abstract class LivingEntityMixin {
         List<ItemStack> rules = List.of(
                 living().getEquippedStack(EquipmentSlot.FEET),
                 living().getEquippedStack(EquipmentSlot.LEGS),
-                living().getEquippedStack(EquipmentSlot.BODY),
+                living().getEquippedStack(EquipmentSlot.CHEST),
                 living().getEquippedStack(EquipmentSlot.HEAD));
         Map<TagKey<Item>, Integer> fireValues = Map.of(
                 MintTags.Resources.LEATHER_ARMOR, 12,
@@ -119,7 +119,7 @@ public abstract class LivingEntityMixin {
         List<ItemStack> rules = List.of(
                 living().getEquippedStack(EquipmentSlot.FEET),
                 living().getEquippedStack(EquipmentSlot.LEGS),
-                living().getEquippedStack(EquipmentSlot.BODY),
+                living().getEquippedStack(EquipmentSlot.CHEST),
                 living().getEquippedStack(EquipmentSlot.HEAD));
         Map<TagKey<Item>, Integer> fireValues = Map.of(
                 MintTags.Resources.LEATHER_ARMOR, 12,

@@ -26,7 +26,7 @@ import java.util.concurrent.CompletableFuture;
 public class MintLootGens extends FabricBlockLootTableProvider {
     public static List<Block> DROP_SELF = new ArrayList<>();
     public MintLootGens(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
-        super(dataOutput, registryLookup);
+        super(dataOutput);
     }
     protected static final float[] SAPLING_DROP_CHANCE = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
 
@@ -41,42 +41,5 @@ public class MintLootGens extends FabricBlockLootTableProvider {
     public void generate() {
         DROP_SELF.forEach(this::addDrop);
 
-    }
-
-
-
-    public LootTable.Builder singleWithSilkMultiWithout(Block original, Block drop, ItemConvertible drop2) {
-        return LootTable.builder()
-                .pool(
-                        LootPool.builder()
-                                .conditionally(EntityPropertiesLootCondition.create(LootContext.EntityTarget.THIS))
-                                .with(
-                                        AlternativeEntry.builder(
-                                                ItemEntry.builder(drop)
-                                                        .conditionally(this.createWithoutSilkTouchCondition()),
-                                                EmptyEntry.builder()
-                                        )
-                                )
-                )
-                .pool(
-                        LootPool.builder()
-                                .conditionally(EntityPropertiesLootCondition.create(LootContext.EntityTarget.THIS))
-                                .with(
-                                        AlternativeEntry.builder(
-                                                ItemEntry.builder(drop2)
-                                                        .conditionally(this.createWithoutSilkTouchCondition()),
-                                                ItemEntry.builder(original)
-                                        )
-                                )
-                );
-    }
-    public LootTable.Builder oreDrops(Block withSilkTouch, Item withoutSilkTouch) {
-        RegistryWrapper.Impl<Enchantment> impl = this.registries.getOrThrow(RegistryKeys.ENCHANTMENT);
-        return this.dropsWithSilkTouch(
-                withSilkTouch,
-                this.applyExplosionDecay(
-                        withSilkTouch, ItemEntry.builder(withoutSilkTouch).apply(ApplyBonusLootFunction.oreDrops(impl.getOrThrow(Enchantments.FORTUNE)))
-                )
-        );
     }
 }

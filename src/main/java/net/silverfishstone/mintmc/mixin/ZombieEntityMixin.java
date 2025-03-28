@@ -13,6 +13,7 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.silverfishstone.mintmc.resource.entity.CustomTexturedEntity;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,8 +29,8 @@ public class ZombieEntityMixin extends HostileEntity implements CustomTexturedEn
 
 
     @Inject(at = @At("TAIL"), method = "initDataTracker")
-    protected void initDataTracker(DataTracker.Builder builder, CallbackInfo ci) {
-        builder.add(VARIANT, 0);
+    protected void initDataTracker(CallbackInfo ci) {
+        this.getDataTracker().startTracking(VARIANT, 0);
     }
 
     public void setVariant(Integer variant) {
@@ -37,7 +38,7 @@ public class ZombieEntityMixin extends HostileEntity implements CustomTexturedEn
     }
 
     @Inject(at = @At("TAIL"), method = "initialize")
-    protected void initDataTracker(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, EntityData entityData, CallbackInfoReturnable<EntityData> cir) {
+    protected void initDataTracker(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt, CallbackInfoReturnable<EntityData> cir) {
         int random = this.random.nextInt(3) + 1;
         this.setVariant(random);
     }

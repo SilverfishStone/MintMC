@@ -2,13 +2,8 @@ package net.silverfishstone.mintmc.resource.items;
 
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.EquippableComponent;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
-import net.minecraft.item.equipment.ArmorMaterial;
-import net.minecraft.item.equipment.ArmorMaterials;
-import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -16,7 +11,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.silverfishstone.mintmc.MintMain;
 import net.silverfishstone.mintmc.datagen.model.MintModelGens;
-import net.silverfishstone.mintmc.resource.blocks.MintBlocks;
 import net.silverfishstone.mintmc.resource.items.armor.MintArmorMaterials;
 import net.silverfishstone.mintmc.resource.items.tool.MintToolMaterial;
 
@@ -27,101 +21,155 @@ import java.util.function.Function;
 public class MintItems {
     static List<Item> ITEMS = new ArrayList<>();
 
-    public static final Item SOUL_COAL = registerItem("soul_coal", Item::new, new Item.Settings());
+    public static final Item SOUL_COAL = registerItem("soul_coal", new Item(new Item.Settings()), new Item.Settings());
 
-    public static final Item COPPER_HELMET = registerItem("copper_helmet", Item::new, new Item.Settings().armor(MintArmorMaterials.COPPER, EquipmentType.HELMET));
-    public static final Item COPPER_CHESTPLATE = registerItem("copper_chestplate", Item::new, new Item.Settings().armor(MintArmorMaterials.COPPER, EquipmentType.CHESTPLATE));
-    public static final Item COPPER_LEGGINGS = registerItem("copper_leggings", Item::new, new Item.Settings().armor(MintArmorMaterials.COPPER, EquipmentType.LEGGINGS));
-    public static final Item COPPER_BOOTS = registerItem("copper_boots", Item::new, new Item.Settings().armor(MintArmorMaterials.COPPER, EquipmentType.BOOTS));
+    // Copper Armor
+    public static final Item COPPER_HELMET = registerItem("copper_helmet",
+            new ArmorItem(MintArmorMaterials.COPPER, ArmorItem.Type.HELMET, new Item.Settings()), new Item.Settings());
+    public static final Item COPPER_CHESTPLATE = registerItem("copper_chestplate",
+            new ArmorItem(MintArmorMaterials.COPPER, ArmorItem.Type.CHESTPLATE, new Item.Settings()), new Item.Settings());
+    public static final Item COPPER_LEGGINGS = registerItem("copper_leggings",
+            new ArmorItem(MintArmorMaterials.COPPER, ArmorItem.Type.LEGGINGS, new Item.Settings()), new Item.Settings());
+    public static final Item COPPER_BOOTS = registerItem("copper_boots",
+            new ArmorItem(MintArmorMaterials.COPPER, ArmorItem.Type.BOOTS, new Item.Settings()), new Item.Settings());
+
+    // Steel Tools and Armor
+    public static final Item STEEL_SWORD = registerItem("steel_sword",
+            new SwordItem(MintToolMaterial.STEEL, 3, -2.4f, new Item.Settings()), new Item.Settings());
+    public static final Item STEEL_AXE = registerItem("steel_axe",
+            new AxeItem(MintToolMaterial.STEEL, 5.0f, -3.1f, new Item.Settings()), new Item.Settings());
+    public static final Item STEEL_PICKAXE = registerItem("steel_pickaxe",
+            new PickaxeItem(MintToolMaterial.STEEL, 1, -2.8f, new Item.Settings()), new Item.Settings());
+    public static final Item STEEL_SHOVEL = registerItem("steel_shovel",
+            new ShovelItem(MintToolMaterial.STEEL, 1.5f, -3.0f, new Item.Settings()), new Item.Settings());
+    public static final Item STEEL_HOE = registerItem("steel_hoe",
+            new HoeItem(MintToolMaterial.STEEL, -1, -2.0f, new Item.Settings()), new Item.Settings());
+
+    public static final Item STEEL_SCRAP = registerItem("steel_scrap",
+            new Item(new Item.Settings()), new Item.Settings());
+    public static final Item STEEL_ROD = registerItem("steel_rod",
+            new Item(new Item.Settings()), new Item.Settings());
+    public static final Item STEEL_INGOT = registerItem("steel_ingot",
+            new Item(new Item.Settings()), new Item.Settings());
+    public static final Item STEEL_HELMET = registerItem("steel_helmet",
+            new ArmorItem(MintArmorMaterials.STEEL, ArmorItem.Type.HELMET, new Item.Settings()), new Item.Settings());
+    public static final Item STEEL_CHESTPLATE = registerItem("steel_chestplate",
+            new ArmorItem(MintArmorMaterials.STEEL, ArmorItem.Type.CHESTPLATE, new Item.Settings()), new Item.Settings());
+    public static final Item STEEL_LEGGINGS = registerItem("steel_leggings",
+            new ArmorItem(MintArmorMaterials.STEEL, ArmorItem.Type.LEGGINGS, new Item.Settings()), new Item.Settings());
+    public static final Item STEEL_BOOTS = registerItem("steel_boots",
+            new ArmorItem(MintArmorMaterials.STEEL, ArmorItem.Type.BOOTS, new Item.Settings()), new Item.Settings());
+
+    // Ruby Tools and Armor
+    public static final Item RUBY_SWORD = registerItem("ruby_sword",
+            new SwordItem(MintToolMaterial.STEEL, 3, -2.4f, new Item.Settings()), new Item.Settings());
+    public static final Item RUBY_AXE = registerItem("ruby_axe",
+            new AxeItem(MintToolMaterial.STEEL, 5.0f, -3.1f, new Item.Settings()), new Item.Settings());
+    public static final Item RUBY_PICKAXE = registerItem("ruby_pickaxe",
+            new PickaxeItem(MintToolMaterial.STEEL, 1, -2.8f, new Item.Settings()), new Item.Settings());
+    public static final Item RUBY_SHOVEL = registerItem("ruby_shovel",
+            new ShovelItem(MintToolMaterial.STEEL, 1.5f, -3.0f, new Item.Settings()), new Item.Settings());
+    public static final Item RUBY_HOE = registerItem("ruby_hoe",
+            new HoeItem(MintToolMaterial.STEEL, -1, -2.0f, new Item.Settings()), new Item.Settings());
+
+    public static final Item RUBY = registerItem("ruby",
+            new Item(new Item.Settings()), new Item.Settings());
+    public static final Item RUBY_HELMET = registerItem("ruby_helmet",
+            new ArmorItem(MintArmorMaterials.RUBY, ArmorItem.Type.HELMET, new Item.Settings()), new Item.Settings());
+    public static final Item RUBY_CHESTPLATE = registerItem("ruby_chestplate",
+            new ArmorItem(MintArmorMaterials.RUBY, ArmorItem.Type.CHESTPLATE, new Item.Settings()), new Item.Settings());
+    public static final Item RUBY_LEGGINGS = registerItem("ruby_leggings",
+            new ArmorItem(MintArmorMaterials.RUBY, ArmorItem.Type.LEGGINGS, new Item.Settings()), new Item.Settings());
+    public static final Item RUBY_BOOTS = registerItem("ruby_boots",
+            new ArmorItem(MintArmorMaterials.RUBY, ArmorItem.Type.BOOTS, new Item.Settings()), new Item.Settings());
+
+    // Silver Tools and Armor
+    public static final Item SILVER_SWORD = registerItem("silver_sword",
+            new SwordItem(MintToolMaterial.STEEL, 3, -2.4f, new Item.Settings()), new Item.Settings());
+    public static final Item SILVER_AXE = registerItem("silver_axe",
+            new AxeItem(MintToolMaterial.STEEL, 5.0f, -3.1f, new Item.Settings()), new Item.Settings());
+    public static final Item SILVER_PICKAXE = registerItem("silver_pickaxe",
+            new PickaxeItem(MintToolMaterial.STEEL, 1, -2.8f, new Item.Settings()), new Item.Settings());
+    public static final Item SILVER_SHOVEL = registerItem("silver_shovel",
+            new ShovelItem(MintToolMaterial.STEEL, 1.5f, -3.0f, new Item.Settings()), new Item.Settings());
+    public static final Item SILVER_HOE = registerItem("silver_hoe",
+            new HoeItem(MintToolMaterial.STEEL, -1, -2.0f, new Item.Settings()), new Item.Settings());
+
+    public static final Item RAW_SILVER = registerItem("raw_silver",
+            new Item(new Item.Settings()), new Item.Settings());
+    public static final Item SILVER_INGOT = registerItem("silver_ingot",
+            new Item(new Item.Settings()), new Item.Settings());
+    public static final Item SILVER_HELMET = registerItem("silver_helmet",
+            new ArmorItem(MintArmorMaterials.SILVER, ArmorItem.Type.HELMET, new Item.Settings()), new Item.Settings());
+    public static final Item SILVER_CHESTPLATE = registerItem("silver_chestplate",
+            new ArmorItem(MintArmorMaterials.SILVER, ArmorItem.Type.CHESTPLATE, new Item.Settings()), new Item.Settings());
+    public static final Item SILVER_LEGGINGS = registerItem("silver_leggings",
+            new ArmorItem(MintArmorMaterials.SILVER, ArmorItem.Type.LEGGINGS, new Item.Settings()), new Item.Settings());
+    public static final Item SILVER_BOOTS = registerItem("silver_boots",
+            new ArmorItem(MintArmorMaterials.SILVER, ArmorItem.Type.BOOTS, new Item.Settings()), new Item.Settings());
+
+    // Rose Gold Tools and Armor
+    public static final Item ROSE_GOLD_SWORD = registerItem("rose_gold_sword",
+            new SwordItem(MintToolMaterial.STEEL, 3, -2.4f, new Item.Settings()), new Item.Settings());
+    public static final Item ROSE_GOLD_AXE = registerItem("rose_gold_axe",
+            new AxeItem(MintToolMaterial.STEEL, 5.0f, -3.1f, new Item.Settings()), new Item.Settings());
+    public static final Item ROSE_GOLD_PICKAXE = registerItem("rose_gold_pickaxe",
+            new PickaxeItem(MintToolMaterial.STEEL, 1, -2.8f, new Item.Settings()), new Item.Settings());
+    public static final Item ROSE_GOLD_SHOVEL = registerItem("rose_gold_shovel",
+            new ShovelItem(MintToolMaterial.STEEL, 1.5f, -3.0f, new Item.Settings()), new Item.Settings());
+    public static final Item ROSE_GOLD_HOE = registerItem("rose_gold_hoe",
+            new HoeItem(MintToolMaterial.STEEL, -1, -2.0f, new Item.Settings()), new Item.Settings());
+
+    public static final Item ROSE_GOLD_INGOT = registerItem("rose_gold_ingot",
+            new Item(new Item.Settings()), new Item.Settings());
+    public static final Item ROSE_GOLD_HELMET = registerItem("rose_gold_helmet",
+            new ArmorItem(MintArmorMaterials.ROSE_GOLD, ArmorItem.Type.HELMET, new Item.Settings()), new Item.Settings());
+    public static final Item ROSE_GOLD_CHESTPLATE = registerItem("rose_gold_chestplate",
+            new ArmorItem(MintArmorMaterials.ROSE_GOLD, ArmorItem.Type.CHESTPLATE, new Item.Settings()), new Item.Settings());
+    public static final Item ROSE_GOLD_LEGGINGS = registerItem("rose_gold_leggings",
+            new ArmorItem(MintArmorMaterials.ROSE_GOLD, ArmorItem.Type.LEGGINGS, new Item.Settings()), new Item.Settings());
+    public static final Item ROSE_GOLD_BOOTS = registerItem("rose_gold_boots",
+            new ArmorItem(MintArmorMaterials.ROSE_GOLD, ArmorItem.Type.BOOTS, new Item.Settings()), new Item.Settings());
+
+    // Lead
+    public static final Item LEAD_INGOT = registerItem("lead_ingot",
+            new Item(new Item.Settings()), new Item.Settings());
+
+    // Twilite Tools and Armor
+    public static final Item TWILITE_SWORD = registerItem("twilite_sword",
+            new SwordItem(MintToolMaterial.STEEL, 3, -2.4f, new Item.Settings()), new Item.Settings());
+    public static final Item TWILITE_AXE = registerItem("twilite_axe",
+            new AxeItem(MintToolMaterial.STEEL, 5.0f, -3.1f, new Item.Settings()), new Item.Settings());
+    public static final Item TWILITE_PICKAXE = registerItem("twilite_pickaxe",
+            new PickaxeItem(MintToolMaterial.STEEL, 1, -2.8f, new Item.Settings()), new Item.Settings());
+    public static final Item TWILITE_SHOVEL = registerItem("twilite_shovel",
+            new ShovelItem(MintToolMaterial.STEEL, 1.5f, -3.0f, new Item.Settings()), new Item.Settings());
+    public static final Item TWILITE_HOE = registerItem("twilite_hoe",
+            new HoeItem(MintToolMaterial.STEEL, -1, -2.0f, new Item.Settings()), new Item.Settings());
+
+    public static final Item TWILITE = registerItem("twilite_ingot",
+            new Item(new Item.Settings()), new Item.Settings());
+    public static final Item TWILITE_HELMET = registerItem("twilite_helmet",
+            new ArmorItem(ArmorMaterials.NETHERITE, ArmorItem.Type.HELMET, new Item.Settings()), new Item.Settings());
+    public static final Item TWILITE_CHESTPLATE = registerItem("twilite_chestplate",
+            new ArmorItem(ArmorMaterials.NETHERITE, ArmorItem.Type.CHESTPLATE, new Item.Settings()), new Item.Settings());
+    public static final Item TWILITE_LEGGINGS = registerItem("twilite_leggings",
+            new ArmorItem(ArmorMaterials.NETHERITE, ArmorItem.Type.LEGGINGS, new Item.Settings()), new Item.Settings());
+    public static final Item TWILITE_BOOTS = registerItem("twilite_boots",
+            new ArmorItem(ArmorMaterials.NETHERITE, ArmorItem.Type.BOOTS, new Item.Settings()), new Item.Settings());
+
+    public static final Item EBON_BUCKET = registerItem("ebon_bucket",
+            new BucketItem(Fluids.WATER, new Item.Settings()), new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
 
 
-
-    public static final Item STEEL_SWORD = registerItem("steel_sword", Item::new, new Item.Settings().sword(MintToolMaterial.STEEL, 3.0F, -2.4F));
-    public static final Item STEEL_AXE = registerItem("steel_axe", settings -> new AxeItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-    public static final Item STEEL_PICKAXE = registerItem("steel_pickaxe", Item::new, new Item.Settings().pickaxe(MintToolMaterial.STEEL, 3.0F, -2.4F));
-    public static final Item STEEL_SHOVEL = registerItem("steel_shovel", settings -> new ShovelItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-    public static final Item STEEL_HOE = registerItem("steel_hoe", settings -> new HoeItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-
-    public static final Item STEEL_SCRAP = registerItem("steel_scrap", Item::new, new Item.Settings());
-    public static final Item STEEL_ROD = registerItem("steel_rod", Item::new, new Item.Settings());
-    public static final Item STEEL_INGOT = registerItem("steel_ingot", Item::new, new Item.Settings());
-    public static final Item STEEL_HELMET = registerItem("steel_helmet", Item::new, new Item.Settings().armor(MintArmorMaterials.STEEL, EquipmentType.HELMET));
-    public static final Item STEEL_CHESTPLATE = registerItem("steel_chestplate", Item::new, new Item.Settings().armor(MintArmorMaterials.STEEL, EquipmentType.CHESTPLATE));
-    public static final Item STEEL_LEGGINGS = registerItem("steel_leggings", Item::new, new Item.Settings().armor(MintArmorMaterials.STEEL, EquipmentType.LEGGINGS));
-    public static final Item STEEL_BOOTS = registerItem("steel_boots", Item::new, new Item.Settings().armor(MintArmorMaterials.STEEL, EquipmentType.BOOTS));
-
-
-
-    public static final Item RUBY_SWORD = registerItem("ruby_sword", Item::new, new Item.Settings().sword(MintToolMaterial.STEEL, 3.0F, -2.4F));
-    public static final Item RUBY_AXE = registerItem("ruby_axe", settings -> new AxeItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-    public static final Item RUBY_PICKAXE = registerItem("ruby_pickaxe", Item::new, new Item.Settings().pickaxe(MintToolMaterial.STEEL, 3.0F, -2.4F));
-    public static final Item RUBY_SHOVEL = registerItem("ruby_shovel", settings -> new ShovelItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-    public static final Item RUBY_HOE = registerItem("ruby_hoe", settings -> new HoeItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-
-    public static final Item RUBY = registerItem("ruby", Item::new, new Item.Settings());
-    public static final Item RUBY_HELMET = registerItem("ruby_helmet", Item::new, new Item.Settings().armor(MintArmorMaterials.RUBY, EquipmentType.HELMET));
-    public static final Item RUBY_CHESTPLATE = registerItem("ruby_chestplate", Item::new, new Item.Settings().armor(MintArmorMaterials.RUBY, EquipmentType.CHESTPLATE));
-    public static final Item RUBY_LEGGINGS = registerItem("ruby_leggings", Item::new, new Item.Settings().armor(MintArmorMaterials.RUBY, EquipmentType.LEGGINGS));
-    public static final Item RUBY_BOOTS = registerItem("ruby_boots", Item::new, new Item.Settings().armor(MintArmorMaterials.RUBY, EquipmentType.BOOTS));
-
-
-
-    public static final Item SILVER_SWORD = registerItem("silver_sword", Item::new, new Item.Settings().sword(MintToolMaterial.STEEL, 3.0F, -2.4F));
-    public static final Item SILVER_AXE = registerItem("silver_axe", settings -> new AxeItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-    public static final Item SILVER_PICKAXE = registerItem("silver_pickaxe", Item::new, new Item.Settings().pickaxe(MintToolMaterial.STEEL, 3.0F, -2.4F));
-    public static final Item SILVER_SHOVEL = registerItem("silver_shovel", settings -> new ShovelItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-    public static final Item SILVER_HOE = registerItem("silver_hoe", settings -> new HoeItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-
-    public static final Item RAW_SILVER = registerItem("raw_silver", Item::new, new Item.Settings());
-    public static final Item SILVER_INGOT = registerItem("silver_ingot", Item::new, new Item.Settings());
-    public static final Item SILVER_HELMET = registerItem("silver_helmet", Item::new, new Item.Settings().armor(MintArmorMaterials.SILVER, EquipmentType.HELMET));
-    public static final Item SILVER_CHESTPLATE = registerItem("silver_chestplate", Item::new, new Item.Settings().armor(MintArmorMaterials.SILVER, EquipmentType.CHESTPLATE));
-    public static final Item SILVER_LEGGINGS = registerItem("silver_leggings", Item::new, new Item.Settings().armor(MintArmorMaterials.SILVER, EquipmentType.LEGGINGS));
-    public static final Item SILVER_BOOTS = registerItem("silver_boots", Item::new, new Item.Settings().armor(MintArmorMaterials.SILVER, EquipmentType.BOOTS));
-
-
-
-    public static final Item ROSE_GOLD_SWORD = registerItem("rose_gold_sword", Item::new, new Item.Settings().sword(MintToolMaterial.STEEL, 3.0F, -2.4F));
-    public static final Item ROSE_GOLD_AXE = registerItem("rose_gold_axe", settings -> new AxeItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-    public static final Item ROSE_GOLD_PICKAXE = registerItem("rose_gold_pickaxe", Item::new, new Item.Settings().pickaxe(MintToolMaterial.STEEL, 3.0F, -2.4F));
-    public static final Item ROSE_GOLD_SHOVEL = registerItem("rose_gold_shovel", settings -> new ShovelItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-    public static final Item ROSE_GOLD_HOE = registerItem("rose_gold_hoe", settings -> new HoeItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-
-    public static final Item ROSE_GOLD_INGOT = registerItem("rose_gold_ingot", Item::new, new Item.Settings());
-    public static final Item ROSE_GOLD_HELMET = registerItem("rose_gold_helmet", Item::new, new Item.Settings().armor(MintArmorMaterials.ROSE_GOLD, EquipmentType.HELMET));
-    public static final Item ROSE_GOLD_CHESTPLATE = registerItem("rose_gold_chestplate", Item::new, new Item.Settings().armor(MintArmorMaterials.ROSE_GOLD, EquipmentType.CHESTPLATE));
-    public static final Item ROSE_GOLD_LEGGINGS = registerItem("rose_gold_leggings", Item::new, new Item.Settings().armor(MintArmorMaterials.ROSE_GOLD, EquipmentType.LEGGINGS));
-    public static final Item ROSE_GOLD_BOOTS = registerItem("rose_gold_boots", Item::new, new Item.Settings().armor(MintArmorMaterials.ROSE_GOLD, EquipmentType.BOOTS));
-
-
-
-    public static final Item LEAD_INGOT = registerItem("lead_ingot", Item::new, new Item.Settings());
-
-
-
-    public static final Item TWILITE_SWORD = registerItem("twilite_sword", Item::new, new Item.Settings().sword(MintToolMaterial.STEEL, 3.0F, -2.4F));
-    public static final Item TWILITE_AXE = registerItem("twilite_axe", settings -> new AxeItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-    public static final Item TWILITE_PICKAXE = registerItem("twilite_pickaxe", Item::new, new Item.Settings().pickaxe(MintToolMaterial.STEEL, 3.0F, -2.4F));
-    public static final Item TWILITE_SHOVEL = registerItem("twilite_shovel", settings -> new ShovelItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-    public static final Item TWILITE_HOE = registerItem("twilite_hoe", settings -> new HoeItem(MintToolMaterial.STEEL, 3.0F, -2.4F, settings));
-
-    public static final Item TWILITE = registerItem("twilite_ingot", Item::new, new Item.Settings());
-    public static final Item TWILITE_HELMET = registerItem("twilite_helmet", Item::new, new Item.Settings().armor(ArmorMaterials.NETHERITE, EquipmentType.HELMET));
-    public static final Item TWILITE_CHESTPLATE = registerItem("twilite_chestplate", Item::new, new Item.Settings().armor(ArmorMaterials.NETHERITE, EquipmentType.CHESTPLATE));
-    public static final Item TWILITE_LEGGINGS = registerItem("twilite_leggings", Item::new, new Item.Settings().armor(ArmorMaterials.NETHERITE, EquipmentType.LEGGINGS));
-    public static final Item TWILITE_BOOTS = registerItem("twilite_boots", Item::new, new Item.Settings().armor(ArmorMaterials.NETHERITE, EquipmentType.BOOTS));
-
-    public static final Item EBON_BUCKET = registerItem("ebon_bucket", settings -> new BucketItem(Fluids.WATER, settings), new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1));
-
-
-    private static Item registerItem(String id, Function<Item.Settings, Item> factory, Item.Settings settings) {
-        Item item = Items.register(keyOf(id), factory, settings);
+    private static Item registerItem(String id, Item i, Item.Settings settings) {
+        Item item = Items.register(keyOf(id), i);
         ITEMS.add(item);
         return item;
     }
 
-    public static Item registerItem(String id, Function<Item.Settings, Item> factory) {
-        return Items.register(keyOf(id), factory, new Item.Settings());
+    public static Item registerItem(String id, Item item) {
+        return Items.register(id, item);
     }
 
     public static RegistryKey<Item> keyOf(String id) {
