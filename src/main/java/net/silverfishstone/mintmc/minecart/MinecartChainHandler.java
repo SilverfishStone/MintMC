@@ -5,18 +5,22 @@ import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
+import net.silverfishstone.mintmc.MintMain;
 
 import java.util.*;
 
 public class MinecartChainHandler {
     private static final Map<UUID, AbstractMinecartEntity> chainingPlayers = new HashMap<>();
-    private static final List<List<AbstractMinecartEntity>> minecartChains = new ArrayList<>();
+    public static final List<List<AbstractMinecartEntity>> minecartChains = new ArrayList<>();
+
     private static final Map<UUID, Long> cooldowns = new HashMap<>();
 
     private static final long COOLDOWN_TICKS = 10;
@@ -65,6 +69,11 @@ public class MinecartChainHandler {
     }
 
     private static void onServerTick(ServerWorld world) {
+        followLeader();
+        showConnection(world);
+    }
+
+    private static void followLeader () {
         for (List<AbstractMinecartEntity> chain : minecartChains) {
             if (chain.isEmpty()) continue;
 
@@ -85,6 +94,7 @@ public class MinecartChainHandler {
                 Vec3d difference = leaderPos.subtract(followerPos);
 
                 double distance = difference.length();
+                MintMain.LOGGER.info(String.valueOf(distance));
 
                 if (distance > CHAIN_DISTANCE) {
                     Vec3d direction = difference.normalize();
@@ -97,6 +107,40 @@ public class MinecartChainHandler {
         }
 
         minecartChains.removeIf(List::isEmpty);
+    }
+
+    private static void showConnection(ServerWorld world) {
+        for (List<AbstractMinecartEntity> chain : minecartChains) {
+            if (chain.size() < 2) continue; // Need at least 2 minecarts to show a connection
+
+            AbstractMinecartEntity leader = chain.get(0);
+            for (int i = 1; i < chain.size(); i++) {
+                AbstractMinecartEntity follower = chain.get(i);
+                if (!leader.isAlive() || !follower.isAlive()) continue;
+
+                Vec3d leaderPos = leader.getPos();
+                Vec3d followerPos = follower.getPos();
+                double distance = leaderPos.distanceTo(followerPos);
+
+                // Spawn particles along the line
+                int particleCount = (int) (distance / 0.2); // 1 particle per 0.2 blocks
+                if (particleCount < 1) particleCount = 1;
+
+                Vec3d step = followerPos.subtract(leaderPos).multiply(1.0 / particleCount);
+                for (int j = 0; j <= particleCount; j++) {
+                    Vec3d particlePos = leaderPos.add(step.multiply(j));
+                    world.spawnParticles(
+                            ParticleTypes.WAX_OFF, // Or try ParticleTypes.END_ROD, SMOKE, etc.
+                            particlePos.x, particlePos.y + 0.5, particlePos.z, // Offset for visibility
+                            1, // One particle per step
+                            0.0, 0.0, 0.0, // Minimal spread
+                            0.05 // Slower speed for clarity
+                    );
+                }
+
+                leader = follower; // Move to next pair
+            }
+        }
     }
 
     private static List<AbstractMinecartEntity> getMinecartChain(AbstractMinecartEntity cart) {
