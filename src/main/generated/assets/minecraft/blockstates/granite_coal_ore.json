@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "minecraft:block/granite_coal_ore"
+    }
+  }
+}

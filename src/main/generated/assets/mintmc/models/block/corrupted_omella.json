@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "minecraft:block/end_stone",
-    "side": "mintmc:block/corrupted_omella_side",
-    "top": "mintmc:block/corrupted_omella"
-  }
-}
