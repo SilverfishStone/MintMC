@@ -11,10 +11,8 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.silverfishstone.mintmc.MintMain;
 import net.silverfishstone.mintmc.datagen.model.MintModelGens;
-import net.silverfishstone.mintmc.resource.blocks.custom.CrucibleBlock;
 import net.silverfishstone.mintmc.resource.blocks.custom.EbonFluidBlock;
 import net.silverfishstone.mintmc.resource.blocks.custom.EndSoilBlock;
-import net.silverfishstone.mintmc.resource.blocks.entity.CrucibleBlockEntity;
 import net.silverfishstone.mintmc.resource.fluids.MintFluids;
 import net.silverfishstone.mintmc.resource.items.MintItems;
 
@@ -59,6 +57,7 @@ public class MintBlocks {
     public static final Block GRANITE_EMERALD_ORE = registerBlock("granite_emerald_ore",
             new Block(Block.Settings.copy(Blocks.EMERALD_ORE)));
 
+<<<<<<< Updated upstream
     // Crucible
     public static final Block CRUCIBLE = registerBlock("crucible",
             new CrucibleBlock(Block.Settings.copy(Blocks.STONE)));
@@ -91,6 +90,19 @@ public class MintBlocks {
             new Block(Block.Settings.copy(Blocks.DIAMOND_ORE)));
     public static final Block LIMESTONE_EMERALD_ORE = registerBlock("limestone_emerald_ore",
             new Block(Block.Settings.copy(Blocks.EMERALD_ORE)));
+=======
+    public static final Block LIMESTONE = registerBlock("limestone", Block::new, Block.Settings.copy(Blocks.STONE));
+    public static final Block COBBLED_LIMESTONE = registerBlock("cobbled_limestone", Block::new, Block.Settings.copy(Blocks.COBBLESTONE));
+    public static final Block LIMESTONE_RUBY_ORE = registerBlock("limestone_ruby_ore", Block::new, Block.Settings.copy(Blocks.DIAMOND_ORE));
+    public static final Block LIMESTONE_SILVER_ORE = registerBlock("limestone_silver_ore", Block::new, Block.Settings.copy(Blocks.GOLD_ORE));
+    public static final Block LIMESTONE_COAL_ORE = registerBlock("limestone_coal_ore", Block::new, Block.Settings.copy(Blocks.COAL_ORE));
+    public static final Block LIMESTONE_COPPER_ORE = registerBlock("limestone_copper_ore", Block::new, Block.Settings.copy(Blocks.COPPER_ORE));
+    public static final Block LIMESTONE_IRON_ORE = registerBlock("limestone_iron_ore", Block::new, Block.Settings.copy(Blocks.IRON_ORE));
+    public static final Block LIMESTONE_GOLD_ORE = registerBlock("limestone_gold_ore", Block::new, Block.Settings.copy(Blocks.GOLD_ORE));
+    public static final Block LIMESTONE_REDSTONE_ORE = registerBlock("limestone_redstone_ore", RedstoneOreBlock::new, AbstractBlock.Settings.copy(Blocks.REDSTONE_ORE));
+    public static final Block LIMESTONE_DIAMOND_ORE = registerBlock("limestone_diamond_ore", Block::new, Block.Settings.copy(Blocks.DIAMOND_ORE));
+    public static final Block LIMESTONE_EMERALD_ORE = registerBlock("limestone_emerald_ore", Block::new, Block.Settings.copy(Blocks.EMERALD_ORE));
+>>>>>>> Stashed changes
 
     // Special Blocks
     public static final Block ENDERIUM_ORE = registerBlock("enderium_ore",
