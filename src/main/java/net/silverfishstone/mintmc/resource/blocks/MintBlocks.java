@@ -58,6 +58,7 @@ public class MintBlocks {
             new Block(Block.Settings.copy(Blocks.EMERALD_ORE)));
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     // Crucible
     public static final Block CRUCIBLE = registerBlock("crucible",
             new CrucibleBlock(Block.Settings.copy(Blocks.STONE)));
@@ -91,6 +92,8 @@ public class MintBlocks {
     public static final Block LIMESTONE_EMERALD_ORE = registerBlock("limestone_emerald_ore",
             new Block(Block.Settings.copy(Blocks.EMERALD_ORE)));
 =======
+=======
+>>>>>>> Stashed changes
     public static final Block LIMESTONE = registerBlock("limestone", Block::new, Block.Settings.copy(Blocks.STONE));
     public static final Block COBBLED_LIMESTONE = registerBlock("cobbled_limestone", Block::new, Block.Settings.copy(Blocks.COBBLESTONE));
     public static final Block LIMESTONE_RUBY_ORE = registerBlock("limestone_ruby_ore", Block::new, Block.Settings.copy(Blocks.DIAMOND_ORE));
